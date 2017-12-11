@@ -9,7 +9,7 @@ import (
 var durationPtr *int
 
 func init() {
-	durationPtr = flag.Int("mg", 5, "duration in minutes")
+	durationPtr = flag.Int("m", 5, "duration in minutes")
 	flag.Parse()
 }
 
