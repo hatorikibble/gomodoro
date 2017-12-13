@@ -6,24 +6,36 @@ import (
 	"time"
 )
 
-var durationPtr *int
+var minutePtr *int
+var debugPtr *bool
 
 func init() {
-	durationPtr = flag.Int("m", 5, "duration in minutes")
+	minutePtr = flag.Int("m", 5, "duration in minutes")
+	debugPtr = flag.Bool("d", false, "debug mode (count seconds instead of minutes)")
 	flag.Parse()
 }
 
+func setTimer(minutes int) {
+	for m := 1; m <= minutes; m++ {
+		if *debugPtr == true {
+			time.Sleep(time.Second)
+		} else {
+			time.Sleep(time.Minute)
+		}
+		if m == 1 {
+			fmt.Println(" 1 minute has passed...")
+		} else {
+			fmt.Printf("%2d minutes have passed...\n", m)
+		}
+	}
+	fmt.Println("and done..")
+}
+
 func main() {
-	fmt.Printf("Set timer for %d minutes\n", *durationPtr)
-
-	// channel not really needed
-	c1 := make(chan string, 1)
-	go func() {
-		durationInt := *durationPtr
-		time.Sleep(time.Minute * time.Duration(durationInt))
-		c1 <- "and done.."
-	}()
-
-	res := <-c1
-	fmt.Println(res)
+	if *debugPtr == true {
+		fmt.Println("DEBUG MODE: counting seconds instead of minutes")
+	}
+	fmt.Printf("Set timer for %d minutes\n", *minutePtr)
+	minuteInt := *minutePtr
+	setTimer(minuteInt)
 }
