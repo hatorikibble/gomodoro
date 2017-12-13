@@ -37,6 +37,6 @@ Pomodoro Timer in Go
 
 ## Installation
 
-This program uses [[https://github.com/gen2brain/beeep]] for cross-plattform notifications. You can install it with `go get -u github.com/gen2brain/beeep`.
+This program uses https://github.com/gen2brain/beeep for cross-plattform notifications. You can install it with `go get -u github.com/gen2brain/beeep`.
 
 On Linux this library uses _notify-send_, which can be installed e.g. on Ubuntu with `sudo apt install libnotify-bin`
