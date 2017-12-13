@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/gen2brain/beeep"
 	"time"
 )
 
@@ -45,6 +46,10 @@ func setTimer(minutes int) {
 		}
 	}
 	fmt.Println("and done..")
+	err := beeep.Notify("Gomodoro", "and done...")
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
