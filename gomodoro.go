@@ -6,12 +6,28 @@ import (
 	"time"
 )
 
+const shortWorkMinutes int = 15
+const longWorkMinutes int = 25
+const shortPauseMinutes int = 5
+const longPauseMinutes int = 10
+
 var minutePtr *int
 var debugPtr *bool
+var shortWorkPtr *bool
+var longWorkPtr *bool
+var shortPausePtr *bool
+var longPausePtr *bool
+
+var minuteInt int
 
 func init() {
 	minutePtr = flag.Int("m", 5, "duration in minutes")
 	debugPtr = flag.Bool("d", false, "debug mode (count seconds instead of minutes)")
+	shortWorkPtr = flag.Bool("w", false, "short work (15 min)")
+	longWorkPtr = flag.Bool("W", false, "long work (25 min)")
+	shortPausePtr = flag.Bool("p", false, "short pause (5 min)")
+	longPausePtr = flag.Bool("P", false, "long pause (10 min)")
+
 	flag.Parse()
 }
 
@@ -35,7 +51,20 @@ func main() {
 	if *debugPtr == true {
 		fmt.Println("DEBUG MODE: counting seconds instead of minutes")
 	}
-	fmt.Printf("Set timer for %d minutes\n", *minutePtr)
-	minuteInt := *minutePtr
+
+	if *shortWorkPtr == true {
+		minuteInt = shortWorkMinutes
+	} else if *longWorkPtr == true {
+		minuteInt = longWorkMinutes
+	} else if *shortPausePtr == true {
+		minuteInt = shortPauseMinutes
+	} else if *longPausePtr == true {
+		minuteInt = longPauseMinutes
+	} else {
+		minuteInt = *minutePtr
+	}
+
+	fmt.Printf("Set timer for %d minutes\n", minuteInt)
+
 	setTimer(minuteInt)
 }
