@@ -46,7 +46,7 @@ func setTimer(minutes int) {
 		}
 	}
 	fmt.Println("and done..")
-	err := beeep.Notify("Gomodoro", "and done...")
+	err := beeep.Notify("Gomodoro", "and done...", "assets/tomato.png")
 	if err != nil {
 		panic(err)
 	}
